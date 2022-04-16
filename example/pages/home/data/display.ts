@@ -22,10 +22,10 @@ const display = {
       name: 'Cell',
       label: '单元格',
     },
-    // {
-    //   name: 'Collapse',
-    //   label: '折叠面板',
-    // },
+    {
+      name: 'Collapse',
+      label: '折叠面板',
+    },
     {
       name: 'CountDown',
       label: '倒计时',
@@ -34,10 +34,10 @@ const display = {
       name: 'Divider',
       label: '分割线',
     },
-    // {
-    //   name: 'DropdownMenu',
-    //   label: '下拉菜单',
-    // },
+    {
+      name: 'DropdownMenu',
+      label: '下拉菜单',
+    },
     {
       name: 'Empty',
       label: '空状态',

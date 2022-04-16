@@ -19,6 +19,8 @@ export default class Radio extends SuperComponent {
     `${prefix}-class-border`,
   ];
 
+  behaviors = ['wx://form-field'];
+
   relations = {
     '../radio-group/radio-group': {
       type: 'ancestor' as 'ancestor',
@@ -37,6 +39,10 @@ export default class Radio extends SuperComponent {
 
   properties = {
     ...Props,
+    borderless: {
+      type: Boolean,
+      value: false,
+    },
   };
 
   controlledProps = [
@@ -58,7 +64,6 @@ export default class Radio extends SuperComponent {
     prefix,
     active: false,
     classPrefix: name,
-    classBasePrefix: prefix,
     customIcon: false,
     optionLinked: false,
     iconVal: [],

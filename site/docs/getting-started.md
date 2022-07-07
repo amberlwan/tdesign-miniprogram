@@ -4,11 +4,11 @@ description: TDesign 微信小程序组件库。
 spline: explain
 ---
 
-<div style="background: #d4e3fc; display: flex; align-items: center; line-height: 20px; padding: 14px 24px; border-radius: 3px; color: #555a65">
+<div style="background: rgba(0, 168, 112, .1); display: flex; align-items: center; line-height: 20px; padding: 14px 24px; border-radius: 3px; color: #555a65">
   <svg fill="none" viewBox="0 0 16 16" width="16px" height="16px" style="margin-right: 5px">
-    <path fill="rgb(0, 82, 217)" d="M8 15A7 7 0 108 1a7 7 0 000 14zM7.4 4h1.2v1.2H7.4V4zm.1 2.5h1V12h-1V6.5z" fillOpacity="0.9"></path>
+    <path fill="#00a870" d="M8 15A7 7 0 108 1a7 7 0 000 14zM7.4 4h1.2v1.2H7.4V4zm.1 2.5h1V12h-1V6.5z" fillOpacity="0.9"></path>
   </svg>
-  目前组件库处于 Alpha 阶段，快速迭代中，请留意版本变化。
+  目前组件库处于 Beta 阶段，快速迭代中，请留意版本变化。
 </div>
 
 ## 预览
@@ -34,14 +34,6 @@ npm i tdesign-miniprogram -S --production
 
 > 安装完之后，需要在微信开发者工具中对 npm 进行构建：`工具 -  构建 npm`
 
-### 通过 Git Clone
-
-克隆到源代码之后，然后将 `tdesign-miniprogram` 目录拷贝到自己的项目中
-
-```bash
-git clone git@github.com:Tencent/tdesign-miniprogram.git
-```
-
 ## 修改 app.json
 
 将 `app.json` 中的 `"style": "v2"` 移除。
@@ -55,7 +47,7 @@ git clone git@github.com:Tencent/tdesign-miniprogram.git
 ```json
 {
   "usingComponents": {
-    "t-button": "/path/to/tdesign-miniprogram/dist/button/index"
+    "t-button": "tdesign-miniprogram/button/button"
   }
 }
 ```
@@ -80,4 +72,4 @@ npm run dev
 
 ## 基础库版本
 
-最低基础库版本`^2.6.1`
+最低基础库版本`^2.6.5`

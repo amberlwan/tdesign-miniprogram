@@ -19,8 +19,17 @@ export default class Picker extends SuperComponent {
   };
 
   relations = {
-    './picker-column': {
+    './picker-item': {
       type: 'child' as 'child',
+      linked(this: Picker) {
+        this.updateChildren();
+      },
+    },
+  };
+
+  observers = {
+    value() {
+      this.updateChildren();
     },
   };
 
@@ -36,37 +45,64 @@ export default class Picker extends SuperComponent {
    */
   methods = {
     getPickerColumns() {
-      const pickerColumns = this.getRelationNodes('./picker-column');
+      const pickerColumns = this.getRelationNodes('./picker-item');
       if (Array.isArray(pickerColumns)) {
         return pickerColumns;
       }
       return [];
     },
-    getSelectedValues() {
+
+    updateChildren() {
+      const { value } = this.properties;
       const pickerColumns = this.getPickerColumns();
-      if (pickerColumns?.length === 0) {
-        return { index: undefined, value: undefined };
+
+      if (!pickerColumns?.length) {
+        return;
       }
 
-      const selectedValues = {
-        index: pickerColumns.map((pickerColumn) => pickerColumn._selectedIndex),
-        value: pickerColumns.map((pickerColumn) => pickerColumn._selectedValue),
-      };
+      pickerColumns.forEach((child, index) => {
+        child.setData({
+          value: value?.[index] || '',
+        });
+        child.update();
+      });
+    },
 
-      return selectedValues;
+    getSelectedValue() {
+      const pickerColumns = this.getPickerColumns();
+      const value = pickerColumns.map((item) => item._selectedValue);
+      const label = pickerColumns.map((item) => item._selectedLabel);
+      return [value, label];
     },
+
+    getColumnIndexes() {
+      const pickerColumns = this.getPickerColumns();
+      const columns = pickerColumns.map((pickerColumn, columnIndex) => {
+        return {
+          column: columnIndex,
+          index: pickerColumn._selectedIndex,
+        };
+      });
+      return columns;
+    },
+
     onConfirm() {
-      this.triggerEvent('confirm', this.getSelectedValues());
+      const [value, label] = this.getSelectedValue();
+      const columns = this.getColumnIndexes();
+      this.triggerEvent('change', { value, label, columns });
+      this.triggerEvent('confirm', { value, label, columns });
     },
+
+    triggerColumnChange({ column, index }) {
+      const [value, label] = this.getSelectedValue();
+      this.triggerEvent('pick', { value, label, column, index });
+    },
+
     onCancel() {
       this.triggerEvent('cancel');
     },
-    triggerChange({ column, index, value }) {
-      this.triggerEvent('change', { column, index, value });
-    },
   };
 
-  // 给 column 打标 标识顺序
   ready() {
     const columns = this.getPickerColumns();
     columns.map((column, index) => (column.columnIndex = index));

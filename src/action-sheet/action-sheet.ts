@@ -9,9 +9,9 @@ const name = `${prefix}-action-sheet`;
 
 @wxComponent()
 export default class ActionSheet extends SuperComponent {
-  static show: typeof show;
+  static show = show;
 
-  externalClasses = [`${prefix}-class`];
+  externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-cancel`];
 
   properties = {
     ...props,

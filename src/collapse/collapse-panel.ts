@@ -11,7 +11,11 @@ const nextTick = () => new Promise((resolve) => setTimeout(resolve, 20));
 export interface CollapsePanelProps extends TdCollapsePanelProps {}
 @wxComponent()
 export default class CollapsePanel extends SuperComponent {
-  externalClasses = [`${prefix}-class`];
+  externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-header`];
+
+  options = {
+    multipleSlots: true,
+  };
 
   relations: RelationsOptions = {
     './collapse': {
@@ -33,6 +37,7 @@ export default class CollapsePanel extends SuperComponent {
   properties = props;
 
   data = {
+    prefix,
     contentHeight: 0,
     expanded: false,
     classPrefix: name,

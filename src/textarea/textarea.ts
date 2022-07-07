@@ -22,42 +22,47 @@ export default class Textarea extends SuperComponent {
 
   behaviors = ['wx://form-field'];
 
-  externalClasses = [
-    `${prefix}-class`,
-    `${prefix}-class-textarea`,
-    `${prefix}-class-placeholder`,
-    `${prefix}-class-label`,
-  ];
+  externalClasses = [`${prefix}-class`, `${prefix}-class-textarea`, `${prefix}-class-label`];
 
-  properties = props;
+  properties = {
+    ...props,
+    // 指定光标与键盘的距离。取textarea距离底部的距离和cursor-spacing指定的距离的最小值作为光标与键盘的距离
+    cursorSpacing: {
+      type: Number,
+      value: 0,
+    },
+  };
 
   data = {
     prefix,
-    inputValue: '',
     classPrefix: name,
-    characterLength: 0,
+    count: 0,
   };
 
   /* 组件生命周期 */
   lifetimes = {
     ready() {
-      this.setData({ inputValue: this.data.value });
+      this.getTextareaValueLength(this.data.value);
     },
   };
 
   methods = {
-    onInput(event) {
-      const { value } = event.detail;
+    getTextareaValueLength(textareaValue) {
       const { maxcharacter } = this.properties;
       if (maxcharacter && maxcharacter > 0 && !Number.isNaN(maxcharacter)) {
-        const { characters = '', length = 0 } = getCharacterLength(value, maxcharacter);
+        const { length = 0 } = getCharacterLength(textareaValue, maxcharacter);
         this.setData({
-          value: characters,
-          characterLength: length,
+          count: length,
         });
       } else {
-        this.setData({ inputValue: value });
+        this.setData({
+          count: textareaValue ? String(textareaValue).length : 0,
+        });
       }
+    },
+    onInput(event) {
+      const { value } = event.detail;
+      this.getTextareaValueLength(value);
 
       this.triggerEvent('change', {
         ...event.detail,

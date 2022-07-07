@@ -1,6 +1,6 @@
 const nav = {
   name: ' 导航',
-  icon: '/assets/view-module@2x.png',
+  icon: 'view-module',
   childArr: [
     {
       name: 'Drawer',
@@ -14,10 +14,6 @@ const nav = {
       name: 'Navbar',
       label: '导航栏',
     },
-    // {
-    //   name: 'SegmentedControl',
-    //   label: '分段器',
-    // },
     {
       name: 'Steps',
       label: '步骤条',

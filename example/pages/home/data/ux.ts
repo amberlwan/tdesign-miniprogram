@@ -1,6 +1,6 @@
 const ux = {
   name: '反馈提示',
-  icon: '/assets/chat@2x.png',
+  icon: 'chat',
   childArr: [
     {
       name: 'ActionSheet',
@@ -30,6 +30,10 @@ const ux = {
     //   name: 'NoticeBar',
     //   label: '公告栏',
     // },
+    {
+      name: 'Overlay',
+      label: '遮罩层',
+    },
     {
       name: 'Popup',
       label: '弹出层',

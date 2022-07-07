@@ -89,6 +89,35 @@ Page({
 });
 ```
 
+### 与 Popup 使用
+
+```html
+ <t-popup visible="{{visible}}" bind:visible-change="onVisibleChange">
+  <t-tabs id="tabs" defaultValue="{{0}}" bind:change="onTabsChange" bind:click="onTabsClick" t-class="custom-tabs">
+    <t-tab-panel label="标签页一" value="0">标签一内容</t-tab-panel>
+    <t-tab-panel label="标签页二" value="1">标签二内容</t-tab-panel>
+    <t-tab-panel label="标签页三" value="2">标签三内容</t-tab-panel>
+  </t-tabs>
+</t-popup>
+```
+
+```js
+Page({
+  data: {
+    visible: false
+  },
+  showPopup() {
+    this.setData({
+      visible: true
+    }, () => {
+      const tabs = this.selectComponent('tabs');
+
+      tabs.setTrack(); // 这一步很重要，因为小程序的无法正确执行生命周期，所以需要手动设置下 tabs 的滑块
+    })
+  }
+})
+```
+
 ## API
 ### Tabs Props
 
@@ -113,6 +142,6 @@ change | `(value: TabValue)` | 激活的选项卡发生变化时触发
 -- | -- | -- | -- | --
 destroy-on-hide | Boolean | true | 选项卡内容隐藏时是否销毁 | N
 disabled | Boolean | false | 是否禁用当前选项卡 | N
-label | String / Slot | - | 选项卡名称，可自定义选项卡导航内容 | N
+label | String | - | 选项卡名称 | N
 panel | String / Slot | - | 用于自定义选项卡面板内容 | N
 value | String / Number | - | 选项卡的值，唯一标识。TS 类型：`TabValue` | N

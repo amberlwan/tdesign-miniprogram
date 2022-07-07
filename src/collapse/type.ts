@@ -69,11 +69,17 @@ export interface TdCollapsePanelProps {
   };
   /**
    * 当前折叠面板展开图标，优先级大于 Collapse 的同名属性
-   * @default true
    */
   expandIcon?: {
     type: BooleanConstructor;
     value?: boolean;
+  };
+  /**
+   * 组件类名，用于组件外层元素、标题、内容
+   */
+  externalClasses?: {
+    type: ArrayConstructor;
+    value?: ['t-class', 't-class-header', 't-class-content'];
   };
   /**
    * 面板头内容
@@ -87,8 +93,7 @@ export interface TdCollapsePanelProps {
    */
   headerRightContent?: {
     type: StringConstructor;
-    optionalTypes: Array<BooleanConstructor>;
-    value?: string | boolean;
+    value?: string;
   };
   /**
    * 当前面板唯一标识，如果值为空则取当前面下标兜底作为唯一标识

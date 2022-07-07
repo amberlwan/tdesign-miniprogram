@@ -9,7 +9,7 @@
   preventScrollThrough="{{preventScrollThrough}}"
   zIndex="{{zIndex}}"
   placement="{{center}}"
-  bindoverlayClick="overlayClick"
+  bind:visible-change="overlayClick"
 >
   <view slot="content" class="{{classPrefix}} {{prefix}}-class">
     <view class="{{classPrefix}}__content {{prefix}}-class-content">
@@ -49,7 +49,7 @@
         <template
           is="button"
           class="{{classPrefix}}__footer-button-host"
-          data="{{...confirmBtn, block: true, type: 'cancel', externalClass: classPrefix + '__button ' + classPrefix + '__button-cancel ' + (cancelBtn ? classPrefix + '__button-half ' : ' ') + prefix + '-class-cancel'}}"
+          data="{{...cancelBtn, block: true, type: 'cancel', externalClass: classPrefix + '__button ' + classPrefix + '__button-cancel ' + (cancelBtn ? classPrefix + '__button-half ' : ' ') + prefix + '-class-cancel'}}"
         ></template>
       </block>
       <slot name="cancelBtn" />
@@ -71,8 +71,7 @@
       <block wx:elif="{{_.getTypeof(confirmBtn) == 'object'}}">
         <template
           is="button"
-          class="{{classPrefix}}__footer-button-host"
-          data="{{...confirmBtn, block: true,  type: 'confirm', externalClass: classPrefix + '__button ' + classPrefix + '__button-confirm ' + (cancelBtn ? classPrefix + '__button-half ' : ' ') + prefix + '-class-confirm'}}"
+          data="{{...confirmBtn, block: true,  type: 'confirm', externalClass: classPrefix + '__button ' + classPrefix + '__button-confirm ' + (cancelBtn ? classPrefix + '__button-half ' : ' ') + prefix + '-class-confirm', class: classPrefix + '__footer-button-host'}}"
         ></template>
       </block>
       <slot name="confirmBtn" />

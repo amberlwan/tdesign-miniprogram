@@ -1,6 +1,6 @@
 const display = {
   name: '信息展示',
-  icon: '/assets/image@2x.png',
+  icon: 'image',
   childArr: [
     {
       name: 'Avatar',
@@ -54,10 +54,10 @@ const display = {
       name: 'Image',
       label: '图片',
     },
-    // {
-    //   name: 'Preview',
-    //   label: '图片预览',
-    // },
+    {
+      name: 'ImageViewer',
+      label: '图片预览',
+    },
     {
       name: 'Swiper',
       label: '轮播图',
@@ -73,6 +73,10 @@ const display = {
     {
       name: 'Sticky',
       label: '吸顶',
+    },
+    {
+      name: 'NoticeBar',
+      label: '公告栏',
     },
   ],
 };

@@ -58,6 +58,16 @@ export const requestAnimationFrame = function (cb: Function) {
     });
 };
 
+export const getRect = function (context: any, selector: string) {
+  return new Promise<WechatMiniprogram.BoundingClientRectCallbackResult>((resolve) => {
+    wx.createSelectorQuery()
+      .in(context)
+      .select(selector)
+      .boundingClientRect()
+      .exec((rect = []) => resolve(rect[0]));
+  });
+};
+
 const isDef = function (value: any): boolean {
   return value !== undefined && value !== null;
 };
@@ -95,8 +105,7 @@ export const getCharacterLength = (str: string, maxCharacter?: number): { length
     };
   }
   let len = 0;
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < str.length; i++) {
+  for (let i = 0; i < str.length; i += 1) {
     let currentStringLength = 0;
     if (str.charCodeAt(i) > 127 || str.charCodeAt(i) === 94) {
       currentStringLength = 2;
@@ -123,7 +132,6 @@ export const getCharacterLength = (str: string, maxCharacter?: number): { length
   };
 };
 
-
 export const chunk = (arr: any[], size: number) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (v, i) => arr.slice(i * size, i * size + size));
 
@@ -141,4 +149,3 @@ export const clone = (val) => {
   }
   return val;
 };
-
